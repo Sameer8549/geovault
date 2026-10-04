@@ -1,85 +1,74 @@
-# GeoVault Animation Guide
+# GeoVault Animation Guide — Dynamic Edition
 
-Every animation must earn its place. This is a professional tool reviewers use hundreds of times a day — motion that doesn't serve clarity or feedback is a cost, not a feature.
+Two layers of motion now: (1) Motion (`motion/react`) for component-level micro-interactions, and (2) GSAP + ScrollTrigger + Lenis for cinematic, scroll-driven choreography across the page. Use the right tool for each job — don't reach for GSAP on a simple hover state, and don't try to build scroll-pinning with Motion alone.
 
-## Should this animate at all?
+## Smooth scroll — Lenis
+Initialize Lenis once at the app root. All scroll-triggered animation (GSAP ScrollTrigger, Motion's `whileInView`) must read scroll position through Lenis, not the native scroll event, so motion stays buttery and frame-synced.
 
-| Frequency | Decision |
-|---|---|
-| 100+ times/day (Cmd+K open/close, keyboard nav) | No animation. Ever. |
-| Tens of times/day (hover states, list row selection) | Remove or drastically reduce |
-| Occasional (modals, drawers, toasts, panel open) | Standard animation |
-| Rare (contradiction resolved, report approved, onboarding) | Can add a touch of delight |
-
-**Never animate keyboard-initiated actions.** They're repeated too often — animation makes the interface feel slower than it is.
-
-## Purpose test
-
-Every animation needs a clear "why":
-- **Spatial consistency** — the Extraction Verification correction panel always slides from the same edge
-- **State indication** — the processing stepper morphs between states, not an abrupt swap
-- **Feedback** — a button scales down slightly on press to confirm the click registered
-- **Preventing jarring changes** — a new contradiction card fades/slides in rather than popping into the list instantly
-
-If the only reason is "it looks cool" and it's something seen often, don't animate it.
-
-## Easing — use these exactly
-
-```css
---ease-out: cubic-bezier(0.23, 1, 0.32, 1);      /* entering elements */
---ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);  /* on-screen movement/morphing */
+## Scroll entry animations — GSAP ScrollTrigger
+Elements never appear statically on load or on scroll into view. Default entrance:
 ```
+translateY(16px) + blur(8px) + opacity:0  →  translateY(0) + blur(0) + opacity:1
+duration: 800ms+, custom cubic-bezier (see easing below)
+```
+Use `IntersectionObserver`-backed triggers (ScrollTrigger handles this internally) — never raw `window.addEventListener('scroll')`, which causes reflows and kills mobile performance.
 
-- Entering/exiting element → `ease-out`
-- Moving/morphing on screen → `ease-in-out`
-- Hover/color change → `ease`
-- Constant motion (progress bar) → `linear`
-- Never `ease-in` on a UI element — it delays the exact moment the user is watching most closely and feels sluggish.
+## Component micro-interactions — Motion
+Use Motion for anything tied to component state: button press, panel open/close, list stagger, shared-element transitions (`layoutId`) between a row and its detail view (contradiction cards, borehole click, document open).
+
+## Easing — custom cubic-beziers only, never default
+```css
+--ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);     /* primary UI motion */
+--ease-out: cubic-bezier(0.23, 1, 0.32, 1);        /* entrances */
+--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);    /* on-screen movement */
+```
+Never `linear` or default `ease-in-out` from the browser. Never `ease-in` on a UI element — it delays feedback at the exact moment attention is highest.
 
 ## Durations
-
 | Element | Duration |
 |---|---|
 | Button press feedback | 100-160ms |
 | Tooltips, small popovers | 125-200ms |
 | Dropdowns, selects | 150-250ms |
-| Modals, drawers, side panels (verification panel, borehole detail) | 200-400ms |
-| Rare/celebratory moments | can run longer |
+| Modals, drawers, side panels | 200-400ms |
+| Scroll-triggered section entrance | 700-900ms |
+| Hamburger/nav morph | 400-600ms with staggered child reveal |
 
-Keep UI animations under 300ms as a default ceiling. Exit animations are always faster than enter animations (e.g. side panel opens 300ms ease-out, closes 180ms ease-out) — pressing/deciding can be a touch slower, release/response is always snappy.
+Exit animations are always faster than enter animations.
 
-## Stagger
+## Signature choreography patterns (required)
 
-When a list loads (document list, borehole list, audit trail entries, contradiction cards), stagger each item 30-80ms. Never longer — long delays make the interface feel slow. Stagger is decorative; never block interaction while it plays.
+**Fluid Island nav**: floating glass pill nav, detached from the top edge (`mt-6 mx-auto w-max rounded-full`). Hamburger (if used on mobile) morphs its lines into an X via rotate/translate, never a disappear/reappear swap. Expanded menu overlay uses `backdrop-blur-3xl bg-black/80`, nav links reveal with staggered mask (`translateY(12px) opacity:0` → `translateY(0) opacity:1`, 50-80ms stagger per item).
 
-## Springs
+**Magnetic button hover**: on hover, scale the whole button down slightly (`active:scale-[0.98]`) to simulate a physical press. A nested icon circle translates diagonally and scales up slightly on hover, creating internal kinetic tension — never just a flat background color change.
 
-Use `useSpring`/`useMotionValue` from Motion for anything tied to continuous input (drag, pointer position, the map's camera transitions) — never `useState` for continuous values, it re-renders the tree on every change and collapses on mobile.
+**List stagger**: document list, borehole list, audit trail entries, contradiction cards — stagger 30-80ms per item on mount, never longer.
 
-## Accessibility
+## Keyboard-triggered actions
+Cmd/Ctrl+K command palette: the trigger itself has zero animation delay (instant response to the keystroke) — only the resulting modal expansion animates (glass-blur expand, 200-300ms). Never animate the detection of the keypress itself.
 
+## Accessibility — still mandatory in a dynamic build
 ```css
 @media (prefers-reduced-motion: reduce) {
-  /* keep opacity and color transitions — they aid comprehension */
-  /* remove all transform/position-based motion */
+  /* keep opacity/color transitions, remove all transform/position/blur motion */
+}
+@media (hover: hover) and (pointer: fine) {
+  /* gate all hover-only effects here */
 }
 ```
 
-```css
-@media (hover: hover) and (pointer: fine) {
-  /* gate all hover-only effects here — touch devices fire false-positive hovers */
-}
-```
+## Performance rules (non-negotiable even with heavier motion)
+- Animate only `transform` and `opacity` — never layout-triggering properties (`top`, `left`, `width`, `height`)
+- `will-change: transform` sparingly, only on actively-animating elements
+- `backdrop-blur` only on fixed/sticky elements, never on scrolling containers
+- Three.js ambient background layer (dashboard shell only): low particle count, capped frame budget, pause/reduce when tab is backgrounded
 
 ## Review checklist before shipping a screen
-
-| Issue | Fix |
-|---|---|
-| `transition: all` | Specify exact properties: `transition: transform 200ms ease-out` |
-| `scale(0)` entry | Start from `scale(0.95)` + `opacity: 0` |
-| `ease-in` anywhere in UI | Switch to `ease-out` or the custom curve above |
-| Animation on a keyboard-triggered action | Remove it entirely |
-| Duration over 300ms on a UI element | Reduce to 150-250ms |
-| Hover animation with no media query guard | Add `(hover: hover) and (pointer: fine)` |
-| All list items appearing at once | Add 30-80ms stagger |
-| Enter/exit using the same speed | Make exit faster than enter |
+- [ ] No `transition: all` — exact properties specified
+- [ ] No default `ease-in-out`/`linear` anywhere
+- [ ] Every section has a scroll-entry animation
+- [ ] List stagger present and under 80ms per item
+- [ ] Enter animations slower than exit animations
+- [ ] Keyboard-triggered actions have zero input-detection delay
+- [ ] prefers-reduced-motion and hover media query guards present
+- [ ] Only transform/opacity animated anywhere in the codebase

@@ -19,17 +19,22 @@ See `docs/design-principles.md` and `docs/animation-guide.md` for the full rule 
 
 ---
 
-## Stack — latest stable versions
+## Stack — Dynamic Edition (supersedes earlier Next.js version)
 
-- Next.js 16.3 (App Router, Turbopack, React 19.2, TypeScript 5.9)
-- Tailwind CSS v4 (`@tailwindcss/postcss`, not the legacy plugin)
-- shadcn/ui — own the components, never ship default unstyled state
-- Motion (`import { motion } from "motion/react"`, not `framer-motion`)
+- Vite + React 19 + TypeScript, React Router v7
+- Tailwind CSS v4
+- shadcn/ui — fully restyled for Ethereal Glass, never shipped default
+- Motion (`motion/react`) for component micro-interactions
+- GSAP + ScrollTrigger for cinematic scroll-driven section entrances
+- Lenis for smooth scroll (drives all scroll-based motion)
 - Mapbox GL JS v3 + deck.gl 9.x (3D borehole columns)
-- Recharts
-- TanStack Query, Zod, next-themes
-- lucide-react (one icon family only, strokeWidth 1.5 globally)
+- Three.js — subtle ambient background layer, dashboard shell only
+- Recharts, TanStack Query, Zod
+- Phosphor Icons (Light weight) — NOT lucide-react
+- Fonts: Clash Display (display) + Plus Jakarta Sans (body) + JetBrains Mono (technical values) — NOT Inter
 - pnpm
+
+Visual direction: **Ethereal Glass** (OLED black, glowing mesh gradients, glass cards) + **Z-Axis Cascade** layout for Dashboard/Contradiction Detection. Full rules in `docs/design-principles.md` and `docs/animation-guide.md` — these are binding, not suggestions.
 
 ---
 
