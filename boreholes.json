@@ -1,0 +1,56 @@
+{
+  "boreholes": [
+    {
+      "id": "bh_0042",
+      "report_id": "doc_001",
+      "latitude": 21.0045,
+      "longitude": 85.2201,
+      "intervals": [
+        { "from_depth": 0, "to_depth": 12.5, "lithology": "Topsoil / weathered sandstone", "seam_name": null, "ash_pct": null, "gcv": null, "moisture_pct": null, "source_page": 3, "confidence": 0.95 },
+        { "from_depth": 12.5, "to_depth": 18.2, "lithology": "Sandstone, fine-grained", "seam_name": "Seam III", "ash_pct": 18.4, "gcv": 4850, "moisture_pct": 6.1, "source_page": 4, "confidence": 0.91 },
+        { "from_depth": 18.2, "to_depth": 24.0, "lithology": "Carbonaceous shale", "seam_name": "Seam III", "ash_pct": 21.2, "gcv": 4600, "moisture_pct": 7.4, "source_page": 4, "confidence": 0.84 }
+      ]
+    },
+    {
+      "id": "bh_0043",
+      "report_id": "doc_001",
+      "latitude": 21.0098,
+      "longitude": 85.2254,
+      "intervals": [
+        { "from_depth": 0, "to_depth": 9.0, "lithology": "Topsoil", "seam_name": null, "ash_pct": null, "gcv": null, "moisture_pct": null, "source_page": 6, "confidence": 0.97 },
+        { "from_depth": 9.0, "to_depth": 16.5, "lithology": "Medium sandstone", "seam_name": "Seam II", "ash_pct": 15.9, "gcv": 5120, "moisture_pct": 5.8, "source_page": 7, "confidence": 0.89 }
+      ]
+    },
+    {
+      "id": "bh_0051",
+      "report_id": "doc_004",
+      "latitude": 22.3412,
+      "longitude": 82.6871,
+      "intervals": [
+        { "from_depth": 0, "to_depth": 14.2, "lithology": "Weathered shale", "seam_name": null, "ash_pct": null, "gcv": null, "moisture_pct": null, "source_page": 8, "confidence": 0.93 },
+        { "from_depth": 14.2, "to_depth": 22.7, "lithology": "Coal, banded", "seam_name": "Korba Seam I", "ash_pct": 24.1, "gcv": 4320, "moisture_pct": 8.2, "source_page": 9, "confidence": 0.88 },
+        { "from_depth": 22.7, "to_depth": 29.4, "lithology": "Fireclay", "seam_name": "Korba Seam I", "ash_pct": 19.6, "gcv": 4710, "moisture_pct": 6.9, "source_page": 9, "confidence": 0.79 }
+      ]
+    },
+    {
+      "id": "bh_0067",
+      "report_id": "doc_006",
+      "latitude": 23.7398,
+      "longitude": 86.4142,
+      "intervals": [
+        { "from_depth": 0, "to_depth": 11.0, "lithology": "Alluvium", "seam_name": null, "ash_pct": null, "gcv": null, "moisture_pct": null, "source_page": 5, "confidence": 0.96 },
+        { "from_depth": 11.0, "to_depth": 19.8, "lithology": "Coal, bright banded", "seam_name": "Jharia Seam XIV", "ash_pct": 16.8, "gcv": 5340, "moisture_pct": 4.9, "source_page": 6, "confidence": 0.92 }
+      ]
+    },
+    {
+      "id": "bh_0068",
+      "report_id": "doc_006",
+      "latitude": 23.7441,
+      "longitude": 86.4199,
+      "intervals": [
+        { "from_depth": 0, "to_depth": 13.4, "lithology": "Alluvium / weathered zone", "seam_name": null, "ash_pct": null, "gcv": null, "moisture_pct": null, "source_page": 11, "confidence": 0.94 },
+        { "from_depth": 13.4, "to_depth": 20.1, "lithology": "Coal, dull banded", "seam_name": "Jharia Seam XIV", "ash_pct": 22.5, "gcv": 4480, "moisture_pct": 7.1, "source_page": 12, "confidence": 0.81 }
+      ]
+    }
+  ]
+}

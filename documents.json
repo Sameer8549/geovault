@@ -1,0 +1,12 @@
+{
+  "documents": [
+    { "id": "doc_001", "title": "Borehole Log — Talcher Coalfield Sector 4", "category": "borehole_log", "status": "verified", "uploaded_at": "2026-09-10T08:30:00Z", "page_count": 12, "confidentiality": "internal" },
+    { "id": "doc_002", "title": "Environmental Clearance Report — IB Valley Mine", "category": "environmental", "status": "verified", "uploaded_at": "2026-09-12T11:05:00Z", "page_count": 28, "confidentiality": "restricted" },
+    { "id": "doc_003", "title": "Khanan Prahari Complaint Batch — August 2026", "category": "correspondence", "status": "needs_review", "uploaded_at": "2026-09-14T09:40:00Z", "page_count": 6, "confidentiality": "internal" },
+    { "id": "doc_004", "title": "Geological Exploration Report — Korba Block", "category": "exploration_report", "status": "verified", "uploaded_at": "2026-09-15T14:20:00Z", "page_count": 34, "confidentiality": "internal" },
+    { "id": "doc_005", "title": "Parliamentary Question Response Draft — Q412", "category": "parliamentary", "status": "pending_approval", "uploaded_at": "2026-09-18T10:00:00Z", "page_count": 3, "confidentiality": "restricted" },
+    { "id": "doc_014", "title": "Revised Borehole Log — Talcher Coalfield Sector 4 (v2)", "category": "borehole_log", "status": "needs_review", "uploaded_at": "2026-09-22T09:15:00Z", "page_count": 12, "confidentiality": "internal" },
+    { "id": "doc_006", "title": "Mine Planning Report — Jharia Coalfield Zone B", "category": "exploration_report", "status": "verified", "uploaded_at": "2026-09-19T13:00:00Z", "page_count": 21, "confidentiality": "internal" },
+    { "id": "doc_007", "title": "Incident Report — Overburden Slippage, Sector 2", "category": "incident", "status": "verified", "uploaded_at": "2026-09-20T16:45:00Z", "page_count": 5, "confidentiality": "restricted" }
+  ]
+}

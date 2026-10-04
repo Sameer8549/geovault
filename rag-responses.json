@@ -1,0 +1,27 @@
+{
+  "examples": [
+    {
+      "question": "What is the latest approved GCV for Seam III near Talcher?",
+      "answer": "The most recently approved gross calorific value (GCV) for the depth interval associated with Seam III at the Talcher Sector 4 borehole is 5120 kcal/kg, recorded in the revised borehole log dated September 22, 2026, superseding an earlier figure of 4850 kcal/kg from the original September 10, 2026 report.",
+      "citations": [
+        { "document_id": "doc_014", "document_title": "Revised Borehole Log — Talcher Coalfield Sector 4 (v2)", "page": 2, "date": "2026-09-22" },
+        { "document_id": "doc_001", "document_title": "Borehole Log — Talcher Coalfield Sector 4", "page": 4, "date": "2026-09-10" }
+      ],
+      "grounded": true
+    },
+    {
+      "question": "How many overburden slippage incidents occurred at Sector 2 in the last quarter?",
+      "answer": "One overburden slippage incident at Sector 2 is on record, reported on September 20, 2026.",
+      "citations": [
+        { "document_id": "doc_007", "document_title": "Incident Report — Overburden Slippage, Sector 2", "page": 1, "date": "2026-09-20" }
+      ],
+      "grounded": true
+    },
+    {
+      "question": "What is the projected coal reserve estimate for 2030 at Jharia Zone B?",
+      "answer": "No supporting evidence for a 2030 reserve projection was found in the available corpus. This question cannot be answered from approved records currently indexed.",
+      "citations": [],
+      "grounded": false
+    }
+  ]
+}
